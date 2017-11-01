@@ -47,7 +47,7 @@ public class LoginHelper {
         string JSON_Body = JsonUtility.ToJson(login);
 
 		var request = new UnityWebRequest(LOGIN_URL, "POST");
-		Debug.Log(JSON_Body);
+
 		byte[] bodyRaw = new UTF8Encoding().GetBytes(JSON_Body);
 		request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
 		request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
@@ -58,19 +58,16 @@ public class LoginHelper {
 
         if (request.isHttpError)
         {
-            Debug.Log("Error: " + request.responseCode);
             OnResult (false, null);
         }else
         {
             if(request.responseCode == 200)
             {
-                Debug.Log("Result: " + request.responseCode);
                 string textResult = request.downloadHandler.text;
                 LoginToken token = JsonUtility.FromJson<LoginToken>(textResult);
                 OnResult(true, token);
             } else 
             {
-                Debug.Log("Error: " + request.responseCode);
                 OnResult(false, null); 
             }
         }

@@ -9,13 +9,13 @@ using UnityEngine.Networking;
 [Serializable]
 public class Player
 {
-	public string name;
-	public int coins;
+	public string nickname;
+	public int money;
 
-	public Player(string _name, int _coins)
+	public Player(string _nickname, int _money)
 	{
-        name = _name;
-        coins = _coins;
+        nickname = _nickname;
+        money = _money;
 	}
 }
 
@@ -36,21 +36,18 @@ public class PlayerHelper {
 
 		if (request.isHttpError)
 		{
-			Debug.Log("Error: " + request.responseCode);
 			OnResult(false, null);
 		}
 		else
 		{
 			if (request.responseCode == 200)
 			{
-				Debug.Log("Result: " + request.responseCode);
 				string textResult = request.downloadHandler.text;
                 Player player = JsonUtility.FromJson<Player>(textResult);
 				OnResult(true, player);
 			}
 			else
 			{
-				Debug.Log("Error: " + request.responseCode);
 				OnResult(false, null);
 			}
 		}
