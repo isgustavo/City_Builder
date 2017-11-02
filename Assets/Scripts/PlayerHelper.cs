@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 [Serializable]
 public class Player
 {
-	public string nickname;
+    public string nickname;
 	public int money;
 
 	public Player(string _nickname, int _money)
