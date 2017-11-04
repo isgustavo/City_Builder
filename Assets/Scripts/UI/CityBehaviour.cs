@@ -7,6 +7,8 @@ public class CityBehaviour : UIBehaviour {
     [SerializeField]
     private GameObject cityObject;
 
+    public static bool isDragBuilding;
+
 	public override void GameStateChanged(GameState gameState)
 	{
 		switch (gameState)
