@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Build : MonoBehaviour {
+public class BuildItem : MonoBehaviour {
+
+    [SerializeField]
+    private float contructionTime;
+    [SerializeField]
+    private GameObject loadingObject;
 
     public bool isNew;
 
@@ -11,6 +16,7 @@ public class Build : MonoBehaviour {
         Debug.Log("Start");
         isNew = true;
         StartCoroutine(FixBuildTime());
+        StartCoroutine(ContructionBuildTime());
     }
 
     IEnumerator FixBuildTime ()
@@ -18,6 +24,13 @@ public class Build : MonoBehaviour {
         yield return new WaitForSeconds(.1f);
         isNew = false;
     }
+
+    IEnumerator ContructionBuildTime ()
+    {
+        yield return new WaitForSeconds(contructionTime);
+        loadingObject.SetActive(false);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
 	{
 		Debug.Log("OnTriggerEnter2D");

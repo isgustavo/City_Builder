@@ -20,8 +20,6 @@ public class BuildItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler
     private void Start()
     {
         loca = dragObject.localPosition;
-        //Debug.Log(dragObject.position);
-        //Debug.Log(dragObject.localPosition);
     }
 
     public void OnBeginDrag(PointerEventData data)
