@@ -15,6 +15,7 @@ public class GameManagerBehaviour : MonoBehaviour {
 
     public static GameManagerBehaviour instancie;
     public Action<GameState> GameStateAction;
+    public Action PlayerMoneyAction;
 
     public Player player
     {
@@ -40,7 +41,7 @@ public class GameManagerBehaviour : MonoBehaviour {
 
         if (player == null)
         {
-            GameStateChanged(GameState.Game);
+            GameStateChanged(GameState.Login);
         }
 	}
 
@@ -51,6 +52,16 @@ public class GameManagerBehaviour : MonoBehaviour {
         if (GameStateAction != null) 
         {
             GameStateAction (gameState);
+        }
+    }
+
+    public void AddMoney (int profit)
+    {
+        player.money += profit;
+
+        if(PlayerMoneyAction != null)
+        {
+            PlayerMoneyAction();
         }
     }
 

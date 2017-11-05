@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class BuildItem : MonoBehaviour {
 
-    private const int SHOW_COINS_NUMBER = 7;
+    private const int SHOW_COINS_NUMBER = 3;
+    private const float TIME_BETWEEN_COINS = .1f;
 
     [SerializeField]
     private float buildTime;
+	[SerializeField]
+	private int buildCost;
     [SerializeField]
     private float coinsTime;
+    [SerializeField]
+    private int buildProfit;
     [SerializeField]
     private GameObject loadingObject;
     [SerializeField]
@@ -36,6 +41,7 @@ public class BuildItem : MonoBehaviour {
             {
                 StartCoroutine(ShowCoins());
                 currentCoinsTime = 0;
+                GameManagerBehaviour.instancie.AddMoney (buildProfit);
             }
         }
     }
@@ -59,7 +65,7 @@ public class BuildItem : MonoBehaviour {
 		{
             GameObject coin = Instantiate(coinObjectPrefab, transform.position, Quaternion.identity);
 			coin.transform.SetParent(this.transform);
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(TIME_BETWEEN_COINS);
 		}
     }
 

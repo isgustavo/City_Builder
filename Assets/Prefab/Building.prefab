@@ -267,7 +267,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildTime: 3
-  coinsTime: 2
+  buildCost: 50
+  coinsTime: 5
+  buildProfit: 25
   loadingObject: {fileID: 1130645639503460}
   coinObjectPrefab: {fileID: 1751947874061842, guid: 155600e5b767043bb974c04eead02e8f,
     type: 2}

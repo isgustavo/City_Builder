@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerBehaviour : UIBehaviour {
+
+    private const string MONEY_MASK = "000";
 
 	[SerializeField]
 	private Text nicknamePlayerText;
@@ -9,6 +13,15 @@ public class PlayerBehaviour : UIBehaviour {
     private GameObject moneyPanel;
 	[SerializeField]
 	private Text moneyText;
+
+    private int lastMoney;
+
+    public override void Start ()
+    {
+        base.Start();
+
+        GameManagerBehaviour.instancie.PlayerMoneyAction += OnMoneyChanged;
+    }
 
 	public override void GameStateChanged(GameState gameState)
 	{
@@ -20,11 +33,47 @@ public class PlayerBehaviour : UIBehaviour {
                 moneyPanel.SetActive(false);
 				break;
 			case GameState.Game:
-				//nicknamePlayerText.gameObject.SetActive(true);
-                //nicknamePlayerText.text = GameManagerBehaviour.instancie.player.nickname;
-				//moneyPanel.SetActive(true);
-                //moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
+				nicknamePlayerText.gameObject.SetActive(true);
+				nicknamePlayerText.text = GameManagerBehaviour.instancie.player.nickname;
+				moneyPanel.SetActive(true);
+				moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
+				lastMoney = GameManagerBehaviour.instancie.player.money;
 				break;
 		}
+	}
+
+    public void OnMoneyChanged ()
+    {
+        int money = GameManagerBehaviour.instancie.player.money;
+        StopAllCoroutines();
+        if(lastMoney > money)
+        {
+            StartCoroutine(DecreaseValue (money));
+        } else
+        {
+            StartCoroutine(IncreaseValue (money));
+        }
+    }
+
+	IEnumerator IncreaseValue(int money)
+	{
+		while (money > lastMoney)
+		{
+			lastMoney += Mathf.CeilToInt((money - lastMoney) * .2f);
+			moneyText.text = lastMoney.ToString(MONEY_MASK);
+			yield return null;
+		}
+        moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
+	}
+
+	IEnumerator DecreaseValue(int money)
+	{
+		while (money < lastMoney)
+		{
+			lastMoney -= Mathf.CeilToInt((lastMoney - money) * .2f);
+            moneyText.text = lastMoney.ToString(MONEY_MASK);
+			yield return null;
+		}
+        moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
 	}
 }

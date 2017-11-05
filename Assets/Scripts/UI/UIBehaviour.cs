@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class UIBehaviour : MonoBehaviour {
 
-	void Start () {
+	public virtual void Start () {
 		GameManagerBehaviour.instancie.GameStateAction += GameStateChanged;
 	}
 
