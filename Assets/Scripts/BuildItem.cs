@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildItem : MonoBehaviour {
 
@@ -8,43 +8,46 @@ public class BuildItem : MonoBehaviour {
     private const float TIME_BETWEEN_COINS = .1f;
 
     [SerializeField]
-    private float buildTime;
+    private SpriteRenderer buildImage;
 	[SerializeField]
-	private int buildCost;
-    [SerializeField]
-    private float coinsTime;
-    [SerializeField]
-    private int buildProfit;
-    [SerializeField]
-    private GameObject loadingObject;
-    [SerializeField]
-    private GameObject coinObjectPrefab;
+	private GameObject loadingObject;
+	[SerializeField]
+	private GameObject coinObjectPrefab;
+
+    private int constructionTime;
+	private int profitValue;
+    private int profitTime;
 
     private bool isNew;
     private bool isBuilded;
     private float currentCoinsTime;
 
-    public void Start()
-    {
-        isNew = true;
-        isBuilded = false;
-        StartCoroutine(FixBuildTime());
-        StartCoroutine(ContructionBuildTime());
-    }
+	public void SetValues(Sprite sprite, int constructionTime, int profitValue, int profitTime)
+	{
+        this.buildImage.sprite = sprite;
+		this.constructionTime = constructionTime;
+		this.profitValue = profitValue;
+		this.profitTime = profitTime;
 
-    public void Update()
-    {
-        if(isBuilded)
-        {
-            currentCoinsTime += Time.deltaTime;
-            if(currentCoinsTime > coinsTime)
-            {
-                StartCoroutine(ShowCoins());
-                currentCoinsTime = 0;
-                GameManagerBehaviour.instancie.AddMoney (buildProfit);
-            }
-        }
-    }
+		isNew = true;
+		isBuilded = false;
+		StartCoroutine(FixBuildTime());
+		StartCoroutine(ContructionBuildTime());
+	}
+
+	public void Update()
+	{
+		if (isBuilded)
+		{
+			currentCoinsTime += Time.deltaTime;
+			if (currentCoinsTime > profitTime)
+			{
+				StartCoroutine(ShowCoins());
+				currentCoinsTime = 0;
+				GameManagerBehaviour.instancie.AddMoney(profitValue);
+			}
+		}
+	}
 
     IEnumerator FixBuildTime ()
     {
@@ -54,7 +57,7 @@ public class BuildItem : MonoBehaviour {
 
     IEnumerator ContructionBuildTime ()
     {
-        yield return new WaitForSeconds(buildTime);
+        yield return new WaitForSeconds(constructionTime);
         loadingObject.SetActive(false);
         isBuilded = true;
     }
