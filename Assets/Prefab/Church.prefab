@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 114075137758642234}
   - component: {fileID: 61111052768645470}
   - component: {fileID: 50061568102425892}
-  - component: {fileID: 95139046703936804}
   m_Layer: 0
   m_Name: Church
   m_TagString: Untagged
@@ -239,23 +238,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98153126, y: 1.4442344}
   m_EdgeRadius: 0
---- !u!95 &95139046703936804
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1121865410355898}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 416d1d47d834143cdae5f7af353400ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95518475541196658
 Animator:
   serializedVersion: 3

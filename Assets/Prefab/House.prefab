@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 114632076832904696}
   - component: {fileID: 61524743860474276}
   - component: {fileID: 50691284544378144}
-  - component: {fileID: 95899248864109262}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -219,23 +218,6 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5f4bd995e504546ada1fbfd756ad7b9b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95899248864109262
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1728842164023604}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 416d1d47d834143cdae5f7af353400ab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

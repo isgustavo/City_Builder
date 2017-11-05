@@ -40,7 +40,7 @@ public class GameManagerBehaviour : MonoBehaviour {
 
         if (player == null)
         {
-            GameStateChanged(GameState.Login);
+            GameStateChanged(GameState.Game);
         }
 	}
 

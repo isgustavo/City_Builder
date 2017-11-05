@@ -20,10 +20,10 @@ public class PlayerBehaviour : UIBehaviour {
                 moneyPanel.SetActive(false);
 				break;
 			case GameState.Game:
-				nicknamePlayerText.gameObject.SetActive(true);
-                nicknamePlayerText.text = GameManagerBehaviour.instancie.player.nickname;
-				moneyPanel.SetActive(true);
-                moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
+				//nicknamePlayerText.gameObject.SetActive(true);
+                //nicknamePlayerText.text = GameManagerBehaviour.instancie.player.nickname;
+				//moneyPanel.SetActive(true);
+                //moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
 				break;
 		}
 	}
