@@ -16,6 +16,7 @@ public class GameManagerBehaviour : MonoBehaviour {
     public static GameManagerBehaviour instancie;
     public Action<GameState> GameStateAction;
     public Action<int> PlayerMoneyAction;
+    public Action<bool> PauseAction;
 
     public Player player
     {
@@ -41,13 +42,20 @@ public class GameManagerBehaviour : MonoBehaviour {
 
         if (player == null)
         {
-            GameStateChanged(GameState.Login);
+            player = new Player("Gustav", 400);
+            GameStateChanged(GameState.Game);
+            //GameStateChanged(GameState.Login);
         }
 	}
 
     public void GameStateChanged (GameState state)
     {
         gameState = state;
+
+		if (PauseAction != null)
+		{
+            PauseAction(gameState == GameState.Pause ? true : false);
+		}
 
         if (GameStateAction != null) 
         {

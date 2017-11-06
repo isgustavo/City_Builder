@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 50c4b92d3f5334dc29c8e49e817d4984, type: 3}
   price: 100
-  contructionTime: 10
+  contructionTime: 5
   profitValue: 15
-  profitTime: 25
+  profitTime: 10
   buildItemPrefab: {fileID: 1283246608301350, guid: c903441938ef848a2a3fd606b63520cc,
     type: 2}

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildItem : MonoBehaviour {
+public class BuildItem : ObjectBehaviour {
 
     private const int SHOW_COINS_NUMBER = 3;
     private const float TIME_BETWEEN_COINS = .1f;
@@ -33,11 +33,12 @@ public class BuildItem : MonoBehaviour {
 		isBuilded = false;
 		StartCoroutine(FixBuildTime());
 		StartCoroutine(ContructionBuildTime());
+
 	}
 
 	public void Update()
 	{
-		if (isBuilded)
+		if (isBuilded && !isPause)
 		{
 			currentCoinsTime += Time.deltaTime;
 			if (currentCoinsTime > profitTime)
@@ -58,19 +59,37 @@ public class BuildItem : MonoBehaviour {
     IEnumerator ContructionBuildTime ()
     {
         yield return new WaitForSeconds(constructionTime);
-        loadingObject.SetActive(false);
+		yield return new WaitUntil(() => !isPause);
         isBuilded = true;
+        Destroy(loadingObject);
+
     }
 
     IEnumerator ShowCoins ()
     {
 		for (int i = 0; i < SHOW_COINS_NUMBER; i++)
 		{
+            yield return new WaitUntil(() => !isPause);
             GameObject coin = Instantiate(coinObjectPrefab, transform.position, Quaternion.identity);
 			coin.transform.SetParent(this.transform);
             yield return new WaitForSeconds(TIME_BETWEEN_COINS);
 		}
     }
+
+	public override void OnPause(bool pauseValue)
+	{
+		base.OnPause(pauseValue);
+        if(!isBuilded){
+			if (pauseValue)
+			{
+				loadingObject.gameObject.SetActive(false);
+			}
+			else
+			{
+				loadingObject.gameObject.SetActive(true);
+			} 
+        }
+	}
 
     void OnTriggerEnter2D(Collider2D other)
 	{

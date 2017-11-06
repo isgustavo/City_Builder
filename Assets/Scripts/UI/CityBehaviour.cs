@@ -15,12 +15,14 @@ public class CityBehaviour : UIBehaviour {
 		{
 			case GameState.Login:
 			case GameState.LoginError:
+            case GameState.Pause:
                 cityObject.SetActive(false);
 				break;
 			case GameState.Game:
 
                 cityObject.SetActive(true);
 				break;
+
 		}
 	}
 

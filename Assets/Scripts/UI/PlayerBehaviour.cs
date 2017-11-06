@@ -37,7 +37,7 @@ public class PlayerBehaviour : UIBehaviour {
 				nicknamePlayerText.text = GameManagerBehaviour.instancie.player.nickname;
 				moneyPanel.SetActive(true);
 				moneyText.text = GameManagerBehaviour.instancie.player.money.ToString();
-				lastMoney = GameManagerBehaviour.instancie.player.money;
+                lastMoney = GameManagerBehaviour.instancie.player.money;
 				break;
 		}
 	}
