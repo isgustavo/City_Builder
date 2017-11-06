@@ -14,6 +14,7 @@ public class BuildItem : ObjectBehaviour {
 	[SerializeField]
 	private GameObject coinObjectPrefab;
 
+    private int constructionPrice;
     private int constructionTime;
 	private int profitValue;
     private int profitTime;
@@ -22,9 +23,10 @@ public class BuildItem : ObjectBehaviour {
     private bool isBuilded;
     private float currentCoinsTime;
 
-	public void SetValues(Sprite sprite, int constructionTime, int profitValue, int profitTime)
+	public void SetValues(Sprite sprite, int constructionPrice, int constructionTime, int profitValue, int profitTime)
 	{
         this.buildImage.sprite = sprite;
+        this.constructionPrice = constructionPrice;
 		this.constructionTime = constructionTime;
 		this.profitValue = profitValue;
 		this.profitTime = profitTime;
@@ -54,6 +56,7 @@ public class BuildItem : ObjectBehaviour {
     {
         yield return new WaitForSeconds(.1f);
         isNew = false;
+        GameManagerBehaviour.instancie.RemoveMoney(constructionPrice);
     }
 
     IEnumerator ContructionBuildTime ()
@@ -80,21 +83,16 @@ public class BuildItem : ObjectBehaviour {
 	{
 		base.OnPause(pauseValue);
         if(!isBuilded){
-			if (pauseValue)
-			{
-				loadingObject.gameObject.SetActive(false);
-			}
-			else
-			{
-				loadingObject.gameObject.SetActive(true);
-			} 
+            if(loadingObject != null){
+                loadingObject.gameObject.SetActive(!pauseValue);  
+            }
         }
 	}
 
     void OnTriggerEnter2D(Collider2D other)
 	{
         if(isNew)
-            Destroy(this.gameObject);
+            Destroy(this.gameObject);	
     }
 
 }

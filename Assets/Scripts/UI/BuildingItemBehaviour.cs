@@ -65,10 +65,9 @@ public class BuildingItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHand
             Vector3 worldPoiterPosition;
             RectTransformUtility.ScreenPointToWorldPointInRectangle(dragArea, dragObject.position, Camera.main, out worldPoiterPosition);
             GameObject building = Instantiate(item.buildItemPrefab, worldPoiterPosition, Quaternion.identity);
-            building.GetComponentInChildren<BuildItem>().SetValues(item.sprite, item.contructionTime, item.profitValue, item.profitTime);
+            building.GetComponentInChildren<BuildItem>().SetValues(item.sprite, item.price, item.contructionTime, item.profitValue, item.profitTime);
             dragObject.localPosition = originalPosition;
             priceGroup.SetActive(true);
-            GameManagerBehaviour.instancie.RemoveMoney(item.price);
         }
     }
 

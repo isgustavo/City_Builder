@@ -42,9 +42,9 @@ public class GameManagerBehaviour : MonoBehaviour {
 
         if (player == null)
         {
-            player = new Player("Gustav", 400);
-            GameStateChanged(GameState.Game);
-            //GameStateChanged(GameState.Login);
+            //player = new Player("Gustav", 400);
+            //GameStateChanged(GameState.Game);
+            GameStateChanged(GameState.Login);
         }
 	}
 
