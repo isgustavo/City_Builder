@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum GameState
@@ -42,8 +40,6 @@ public class GameManagerBehaviour : MonoBehaviour {
 
         if (player == null)
         {
-            //player = new Player("Gustav", 400);
-            //GameStateChanged(GameState.Game);
             GameStateChanged(GameState.Login);
         }
 	}
