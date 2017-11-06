@@ -6,7 +6,8 @@ public enum GameState
     Login,
     LoginError,
     Game,
-    Pause
+    Pause,
+    Instructions
 }
 
 public class GameManagerBehaviour : MonoBehaviour {
