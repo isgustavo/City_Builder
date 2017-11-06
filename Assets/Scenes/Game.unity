@@ -338,6 +338,7 @@ MonoBehaviour:
   itemPrice: {fileID: 1164382202}
   dragObject: {fileID: 282052430}
   dragArea: {fileID: 360404935}
+  disableColor: {r: 1, g: 1, b: 1, a: 0.4509804}
 --- !u!1 &312489988
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,11 +810,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: d767e61336d644257a082dcff21583eb, type: 2}
-  priceGroup: {fileID: 434336301}
+  priceGroup: {fileID: 517361661}
   itemSprite: {fileID: 472261651}
   itemPrice: {fileID: 1284372155}
   dragObject: {fileID: 472261649}
   dragArea: {fileID: 360404935}
+  disableColor: {r: 1, g: 1, b: 1, a: 0.4509804}
 --- !u!114 &472261651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,6 +1005,7 @@ MonoBehaviour:
   itemPrice: {fileID: 1686553088}
   dragObject: {fileID: 571914265}
   dragArea: {fileID: 360404935}
+  disableColor: {r: 1, g: 1, b: 1, a: 0.4509804}
 --- !u!1 &642210905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1129,7 @@ MonoBehaviour:
   itemPrice: {fileID: 955821985}
   dragObject: {fileID: 725284451}
   dragArea: {fileID: 360404935}
+  disableColor: {r: 1, g: 1, b: 1, a: 0.4509804}
 --- !u!114 &725284453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2815,6 +2819,7 @@ MonoBehaviour:
   itemPrice: {fileID: 870273280}
   dragObject: {fileID: 1567963409}
   dragArea: {fileID: 360404935}
+  disableColor: {r: 1, g: 1, b: 1, a: 0.4509804}
 --- !u!1 &1638316152
 GameObject:
   m_ObjectHideFlags: 0

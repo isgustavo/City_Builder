@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BuildingItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    
     [SerializeField]
     private BuildingItem item;
     [SerializeField]
@@ -18,44 +19,69 @@ public class BuildingItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHand
     private RectTransform dragObject;
     [SerializeField]
     private RectTransform dragArea;
+    [SerializeField]
+    private Color disableColor;
 
     private Vector2 originalDragPointerPosition;
     private Vector3 originalDragPosition;
     private Vector3 originalPosition;
+    private bool isDisable = false;
 
     private void Start()
     {
         originalPosition = dragObject.localPosition;
         itemSprite.sprite = item.sprite;
         itemPrice.text = item.price.ToString("000");
+
+        GameManagerBehaviour.instancie.PlayerMoneyAction += OnMoneyChanged;
     }
 
     public void OnBeginDrag(PointerEventData data)
 	{
-        originalDragPosition = dragObject.localPosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(dragArea, data.position, data.pressEventCamera, out originalDragPointerPosition);
-        priceGroup.SetActive(false);
+        if(!isDisable){
+			originalDragPosition = dragObject.localPosition;
+			RectTransformUtility.ScreenPointToLocalPointInRectangle(dragArea, data.position, data.pressEventCamera, out originalDragPointerPosition);
+			priceGroup.SetActive(false); 
+        }
     }
 
 	public void OnDrag(PointerEventData data)
 	{
-		Vector2 localPointerPosition;
-		if (RectTransformUtility.ScreenPointToLocalPointInRectangle(dragArea, data.position, data.pressEventCamera, out localPointerPosition))
-		{
-			Vector3 offsetToOriginal = localPointerPosition - originalDragPointerPosition;
-			dragObject.localPosition = originalDragPosition + offsetToOriginal;
-		}
+        if (!isDisable)
+        {
+            Vector2 localPointerPosition;
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(dragArea, data.position, data.pressEventCamera, out localPointerPosition))
+            {
+                Vector3 offsetToOriginal = localPointerPosition - originalDragPointerPosition;
+                dragObject.localPosition = originalDragPosition + offsetToOriginal;
+            }
+        }
 	}
 
     public void OnEndDrag(PointerEventData eventData)
     {
-		Vector3 worldPoiterPosition;
-		RectTransformUtility.ScreenPointToWorldPointInRectangle(dragArea, dragObject.position, Camera.main, out worldPoiterPosition);
-        GameObject building = Instantiate(item.buildItemPrefab, worldPoiterPosition, Quaternion.identity);
-        building.GetComponentInChildren<BuildItem>().SetValues(item.sprite, item.contructionTime, item.profitValue, item.profitTime);
-        dragObject.localPosition = originalPosition;
-        priceGroup.SetActive(true);
+        if (!isDisable)
+        {
+            Vector3 worldPoiterPosition;
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(dragArea, dragObject.position, Camera.main, out worldPoiterPosition);
+            GameObject building = Instantiate(item.buildItemPrefab, worldPoiterPosition, Quaternion.identity);
+            building.GetComponentInChildren<BuildItem>().SetValues(item.sprite, item.contructionTime, item.profitValue, item.profitTime);
+            dragObject.localPosition = originalPosition;
+            priceGroup.SetActive(true);
+            GameManagerBehaviour.instancie.RemoveMoney(item.price);
+        }
     }
 
-	
+	public void OnMoneyChanged (int money)
+    {
+        if(item.price > money)
+        {
+            itemSprite.color = disableColor;
+            isDisable = true;
+        } else 
+        {
+            itemSprite.color = Color.white;
+            isDisable = false;
+        }
+    }
 }

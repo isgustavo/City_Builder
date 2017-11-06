@@ -15,7 +15,7 @@ public class GameManagerBehaviour : MonoBehaviour {
 
     public static GameManagerBehaviour instancie;
     public Action<GameState> GameStateAction;
-    public Action PlayerMoneyAction;
+    public Action<int> PlayerMoneyAction;
 
     public Player player
     {
@@ -55,13 +55,23 @@ public class GameManagerBehaviour : MonoBehaviour {
         }
     }
 
+    public void RemoveMoney (int price)
+    {
+		player.money -= price;
+
+		if (PlayerMoneyAction != null)
+		{
+			PlayerMoneyAction(player.money);
+		}
+    }
+
     public void AddMoney (int profit)
     {
         player.money += profit;
 
         if(PlayerMoneyAction != null)
         {
-            PlayerMoneyAction();
+            PlayerMoneyAction(player.money);
         }
     }
 
@@ -77,6 +87,10 @@ public class GameManagerBehaviour : MonoBehaviour {
                     if (loadResult)
                     {
                         player = _player;
+						if (PlayerMoneyAction != null)
+						{
+							PlayerMoneyAction(player.money);
+						}
                         GameStateChanged(GameState.Game);
                     } else 
                     {

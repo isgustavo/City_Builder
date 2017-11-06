@@ -16,7 +16,6 @@ public class CoinBehaviour : MonoBehaviour {
         {
             RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas, destinationPanel.position, Camera.main, out destinationPosition);
 		}
-        Debug.Log(destinationPosition);
         StartCoroutine(DestroyCoin());
     }
 

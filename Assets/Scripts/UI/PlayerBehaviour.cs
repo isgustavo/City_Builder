@@ -42,9 +42,8 @@ public class PlayerBehaviour : UIBehaviour {
 		}
 	}
 
-    public void OnMoneyChanged ()
+    public void OnMoneyChanged (int money)
     {
-        int money = GameManagerBehaviour.instancie.player.money;
         StopAllCoroutines();
         if(lastMoney > money)
         {

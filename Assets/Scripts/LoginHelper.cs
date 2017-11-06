@@ -39,11 +39,11 @@ public class LoginHelper {
 
     private const string LOGIN_URL = "http://dev.pushstart.com.br/desafio/public/api/auth/login";
 
-    private bool requestFinished = false;
+    //private bool requestFinished = false;
 
     public IEnumerator LoginRequest(Login login, Action<bool, LoginToken> OnResult)
     {
-        requestFinished = false;
+        //requestFinished = false;
         string JSON_Body = JsonUtility.ToJson(login);
 
 		var request = new UnityWebRequest(LOGIN_URL, "POST");
@@ -54,7 +54,7 @@ public class LoginHelper {
 		request.SetRequestHeader("Content-Type", "application/json");
 
 		yield return request.Send();
-        requestFinished = true;
+        //requestFinished = true;
 
         if (request.isHttpError)
         {
